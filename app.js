@@ -42,7 +42,10 @@ const PRODUCT_INVENTORY = [
     { id: "SH-29", name: { en: "Neon Grape Deluxe", kh: "ប្រភេទពិសេស Neon Grape Deluxe", ch: "霓虹葡萄豪华克罗格" }, category: "limited", price: 1.25, rating: 4.9, description: "Vibrant deluxe neon grape comfort clogs with glow accents.", image: "assets/shoes/29.png" },
     { id: "SH-30", name: { en: "Shadow Obsidian Elite", kh: "ប្រភេទពិសេស Shadow Obsidian Elite", ch: "暗影黑曜精英克罗格" }, category: "limited", price: 1.25, rating: 5.0, description: "Limited edition sleek obsidian elite clogs for supreme style.", image: "assets/shoes/30.png" },
     { id: "SH-31", name: { en: "Midnight Amethyst Gold", kh: "ប្រភេទពិសេស Midnight Amethyst Gold", ch: "午夜紫金克罗格" }, category: "limited", price: 1.25, rating: 5.0, description: "Rich midnight amethyst clogs detailed with luxury gold hardware.", image: "assets/shoes/31.png" },
-    { id: "SH-33", name: { en: "Imperial Orchid Ultra", kh: "ប្រភេទពិសេស Imperial Orchid Ultra", ch: "皇家兰花至尊克罗格" }, category: "limited", price: 1.25, rating: 5.0, description: "Collector's premium imperial orchid clogs with gold accents.", image: "assets/shoes/33.png" }
+    { id: "SH-33", name: { en: "Imperial Orchid Ultra", kh: "ប្រភេទពិសេស Imperial Orchid Ultra", ch: "皇家兰花至尊克罗格" }, category: "limited", price: 1.25, rating: 5.0, description: "Collector's premium imperial orchid clogs with gold accents.", image: "assets/shoes/33.png" },
+    { id: "CS-01", name: { en: "Cosmetic Cream", kh: "ឡេលាបមុខ", ch: "化妆品" }, category: "cosmetic", price: 1.25, rating: 5.0, description: "Premium beauty cosmetic cream for skin hydration.", image: "assets/cosmetic/1.png" },
+    { id: "CS-02", name: { en: "Cosmetic Serum", kh: "សេរ៉ូមលាបមុខ", ch: "化妆品" }, category: "cosmetic", price: 1.25, rating: 5.0, description: "Nourishing facial beauty cosmetic serum.", image: "assets/cosmetic/2.png" },
+    { id: "CS-03", name: { en: "Cosmetic Powder", kh: "ម្សៅផាត់មុខ", ch: "化妆品" }, category: "cosmetic", price: 1.25, rating: 4.9, description: "Smooth premium face cosmetic powder.", image: "assets/cosmetic/3.png" }
 ];
 
 // Translations System Database
@@ -57,6 +60,7 @@ const TRANSLATIONS = {
         tabPlatform: "Platform Clogs",
         tabSports: "Sports & Outdoor",
         tabLimited: "Limited Edition",
+        tabCosmetic: "Cosmetics",
         custDetailsHeader: "1. Customer Details",
         nameLabel: "Full Name",
         phoneLabel: "Phone Number",
@@ -98,6 +102,7 @@ const TRANSLATIONS = {
         tabPlatform: "ស្បែកជើងកែង",
         tabSports: "កីឡា & ក្រៅផ្ទះ",
         tabLimited: "ប្រភេទពិសេស",
+        tabCosmetic: "គ្រឿងសម្អាង",
         custDetailsHeader: "១. ព័ត៌មានលម្អិតរបស់អតិថិជន",
         nameLabel: "ឈ្មោះពេញ",
         phoneLabel: "លេខទូរស័ព្ទ",
