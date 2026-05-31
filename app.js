@@ -184,8 +184,8 @@ const State = {
     language: "kh",
 
     // Constants
-    deliveryFeeRate: 5.00,
-    freeDeliveryThreshold: 40.00
+    deliveryFeeRate: 0.00,
+    freeDeliveryThreshold: 0.00
 };
 
 // 3. CORE APPLICATION INITIALIZATION
