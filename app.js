@@ -56,6 +56,7 @@ const TRANSLATIONS = {
         heroDesc: "Guaranteed lowest price and quality in Cambodian market",
         searchPlaceholder: "Search comfortable clogs...",
         tabAll: "All Products",
+        tabShoes: "Shoes",
         tabClassic: "Classic Clogs",
         tabPlatform: "Platform Clogs",
         tabSports: "Sports & Outdoor",
@@ -98,6 +99,7 @@ const TRANSLATIONS = {
         heroDesc: "តម្លៃនិងគុណភាពធានាក្រោមទីផ្សារកម្ពុជា",
         searchPlaceholder: "ស្វែងរកស្បែកជើងដែលផាសុកភាព...",
         tabAll: "ផលិតផលទាំងអស់",
+        tabShoes: "ស្បែកជើង",
         tabClassic: "ស្បែកជើងបុរាណ",
         tabPlatform: "ស្បែកជើងកែង",
         tabSports: "កីឡា & ក្រៅផ្ទះ",
@@ -195,6 +197,13 @@ const State = {
 
 // 3. CORE APPLICATION INITIALIZATION
 document.addEventListener("DOMContentLoaded", () => {
+    // Normalize categories to just shoes and cosmetics
+    PRODUCT_INVENTORY.forEach(item => {
+        if (item.category !== "cosmetic") {
+            item.category = "shoes";
+        }
+    });
+
     loadSettings();
     initTheme();
     renderProducts();
