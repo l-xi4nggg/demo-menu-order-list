@@ -15,10 +15,10 @@ const PRODUCT_INVENTORY = [
     { id: "SH-08", name: { en: "Classic Space Grape", kh: "ស្បែកជើងសូក Space Grape", ch: "洞洞鞋" }, category: "classic", price: 1.25, rating: 4.8, description: "An out-of-this-world space grape tone offering ultimate cushion.", image: "assets/shoes/8.png" },
 
     // ========== PLATFORM CLOGS ==========
-    { id: "SH-09", name: { en: "Platform Amethyst Bold", kh: "ស្បែកជើងផ្ទាត់ Amethyst Bold", ch: "拖鞋" }, category: "platform", price: 1.25, rating: 5.0, description: "Thick platform outsole with bold amethyst trim for a stylish lift.", image: "assets/shoes/6.png" },
-    { id: "SH-10", name: { en: "Platform Plum Elevate", kh: "ស្បែកជើងផ្ទាត់ Plum Elevate", ch: "拖鞋" }, category: "platform", price: 1.25, rating: 4.9, description: "Plum platform footwear designed to elevate both your height and style.", image: "assets/shoes/10.png" },
-    { id: "SH-11", name: { en: "Platform Onyx Eclipse", kh: "ស្បែកជើងផ្ទាត់ Onyx Eclipse", ch: "拖鞋" }, category: "platform", price: 1.25, rating: 5.0, description: "Elegant dark onyx eclipse design with our signature chunky platform sole.", image: "assets/shoes/7.png" },
-    { id: "SH-12", name: { en: "Platform Violet Spark", kh: "ស្បែកជើងផ្ទាត់ Violet Spark", ch: "拖鞋" }, category: "platform", price: 1.25, rating: 4.7, description: "A sparkling violet platform clog that adds high-profile height.", image: "assets/shoes/12.png" },
+    { id: "SH-09", name: { en: "Platform Amethyst Bold", kh: "ស្បែកជើងផ្ទាត់ Amethyst Bold", ch: "拖鞋" }, category: "platform", price: 1.25, rating: 5.0, description: "Thick platform outsole with bold amethyst trim for a stylish lift.", image: "assets/shoes/12.png" },
+    { id: "SH-10", name: { en: "Platform Plum Elevate", kh: "ស្បែកជើងផ្ទាត់ Plum Elevate", ch: "拖鞋" }, category: "platform", price: 0.69, rating: 4.9, description: "Plum platform footwear designed to elevate both your height and style.", image: "assets/shoes/10.png" },
+    { id: "SH-11", name: { en: "Platform Onyx Eclipse", kh: "ស្បែកជើងផ្ទាត់ Onyx Eclipse", ch: "拖鞋" }, category: "platform", price: 0.69, rating: 5.0, description: "Elegant dark onyx eclipse design with our signature chunky platform sole.", image: "assets/shoes/7.png" },
+    { id: "SH-12", name: { en: "Platform Violet Spark", kh: "ស្បែកជើងផ្ទាត់ Violet Spark", ch: "拖鞋" }, category: "platform", price: 0.69, rating: 4.7, description: "A sparkling violet platform clog that adds high-profile height.", image: "assets/shoes/6.png" },
     { id: "SH-13", name: { en: "Platform Dusk Lavender", kh: "ស្បែកជើងផ្ទាត់ Dusk Lavender", ch: "拖鞋" }, category: "platform", price: 1.25, rating: 4.8, description: "Chunky platform silhouette finished in serene dusk lavender.", image: "assets/shoes/13.png" },
     { id: "SH-14", name: { en: "Platform Electric Plum", kh: "ស្បែកជើងផ្ទាត់ Electric Plum", ch: "拖鞋" }, category: "platform", price: 1.25, rating: 4.9, description: "Stand tall and comfortable with our electric plum platform model.", image: "assets/shoes/14.png" },
     { id: "SH-15", name: { en: "Platform Royal Purple", kh: "ស្បែកជើងផ្ទាត់ Royal Purple", ch: "拖鞋" }, category: "platform", price: 1.25, rating: 5.0, description: "Premium royal purple platform clogs built with lightweight support.", image: "assets/shoes/15.png" },
@@ -43,9 +43,11 @@ const PRODUCT_INVENTORY = [
     { id: "SH-30", name: { en: "Shadow Obsidian Elite", kh: "ប្រភេទពិសេស Shadow Obsidian Elite", ch: "暗影黑曜精英克罗格" }, category: "limited", price: 1.25, rating: 5.0, description: "Limited edition sleek obsidian elite clogs for supreme style.", image: "assets/shoes/30.png" },
     { id: "SH-31", name: { en: "Midnight Amethyst Gold", kh: "ប្រភេទពិសេស Midnight Amethyst Gold", ch: "午夜紫金克罗格" }, category: "limited", price: 1.25, rating: 5.0, description: "Rich midnight amethyst clogs detailed with luxury gold hardware.", image: "assets/shoes/31.png" },
     { id: "SH-33", name: { en: "Imperial Orchid Ultra", kh: "ប្រភេទពិសេស Imperial Orchid Ultra", ch: "皇家兰花至尊克罗格" }, category: "limited", price: 1.25, rating: 5.0, description: "Collector's premium imperial orchid clogs with gold accents.", image: "assets/shoes/33.png" },
-    { id: "CS-01", name: { en: "Cosmetic Cream", kh: "ឡេលាបមុខ", ch: "化妆品" }, category: "cosmetic", price: 1.25, rating: 5.0, description: "Premium beauty cosmetic cream for skin hydration.", image: "assets/cosmetic/1.png" },
-    { id: "CS-02", name: { en: "Cosmetic Serum", kh: "សេរ៉ូមលាបមុខ", ch: "化妆品" }, category: "cosmetic", price: 1.25, rating: 5.0, description: "Nourishing facial beauty cosmetic serum.", image: "assets/cosmetic/2.png" },
-    { id: "CS-03", name: { en: "Cosmetic Powder", kh: "ម្សៅផាត់មុខ", ch: "化妆品" }, category: "cosmetic", price: 1.25, rating: 4.9, description: "Smooth premium face cosmetic powder.", image: "assets/cosmetic/3.png" }
+
+    //========Cosmetic==========
+    { id: "CS-01", name: { en: "Eyebrow Clip", kh: "ដង្កៀបចាប់រ៉ូមភ្នែក", ch: "眉夹" }, category: "cosmetic", price: 1.25, rating: 5.0, description: "Premium beauty cosmetic cream for skin hydration.", image: "assets/cosmetic/1.png" },
+    { id: "CS-02", name: { en: "Nano", kh: "ម៉ាស៊ីនបាញ់ចំហាយទឹក", ch: "喷雾水" }, category: "cosmetic", price: 1.25, rating: 5.0, description: "Nourishing facial beauty cosmetic serum.", image: "assets/cosmetic/2.png" },
+    { id: "CS-03", name: { en: "Plastic Jar", kh: "ដបច្រកទឹកអប់", ch: "香水瓶" }, category: "cosmetic", price: 1.25, rating: 4.9, description: "Smooth premium face cosmetic powder.", image: "assets/cosmetic/3.png" }
 ];
 
 // Translations System Database
