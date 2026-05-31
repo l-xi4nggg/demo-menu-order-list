@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LODA Live Store</title>
+
+    <!-- Meta tags for SEO & Embedding in Google Sites -->
+    <meta name="description"
+        content="Browse our premium catalog of comfortable clogs, select your favorite models, and submit orders instantly. Securely powered by Google Sheets.">
+    <meta name="author" content="LODA">
+    <meta name="robots" content="index, follow">
+
+    <!-- Google Fonts for Luxury Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!--FavIcon-->
+    <link rel="shortcut icon" href="assets/icons/loda app icon.png">
+
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Core CSS Sheets -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Main Navigation Bar -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="logo-icon"><img src="assets/icons/Loda.png" alt="LODA Logo"></div>
+                <div class="logo-text">
+                    <h1>LODA Live Store</h1>
+                    <p class="tagline">order menu list</p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <!-- Language Selector Dropdown -->
+                <div class="lang-selector">
+                    <button id="lang-btn" class="header-btn lang-btn" title="Change Language">
+                        <img id="current-lang-flag" src="assets/icons/kh.png" alt="Khmer">
+                        <span id="current-lang-text">KH</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <button class="dropdown-item" data-lang="kh">
+                            <img src="assets/icons/kh.png" alt="Khmer">
+                            <span>ភាសាខ្មែរ (KH)</span>
+                        </button>
+                        <button class="dropdown-item" data-lang="en">
+                            <img src="assets/icons/en.png" alt="English">
+                            <span>English (EN)</span>
+                        </button>
+                        <button class="dropdown-item" data-lang="ch">
+                            <img src="assets/icons/ch.png" alt="Chinese">
+                            <span>中文 (CH)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="header-btn" title="Toggle Theme"
+                    aria-label="Toggle light and dark mode">
+                    <i class="fa-solid fa-sun icon-light"></i>
+                    <i class="fa-solid fa-moon icon-dark"></i>
+                </button>
+
+                <!-- Google Sheets Settings Button -->
+                <button id="dev-panel-btn" class="header-btn dev-indicator mock" title="Configure Google Sheets"
+                    aria-label="Open Developer and Sheets Setup Panel">
+                    <i class="fa-solid fa-circle-nodes"></i>
+                    <span class="status-badge-text">Mock Connection</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Application Container -->
+    <main class="app-main">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <span class="hero-badge" data-translate="heroBadge">ចំណាយតែ៣០ដុល្លា
+                    លោកអ្នកនិងក្លាយជាម្ចាស់អាជីវកម្មខ្នាតតូចមួយរូប</span>
+                <h2 data-translate="heroTitle">ជាមួយផលិតផលច្រើនមុខ</h2>
+                <p data-translate="heroDesc">តម្លៃនិងគុណភាពធានាក្រោមទីផ្សារកម្ពុជា</p>
+            </div>
+        </section>
+
+        <!-- Search and Filtering Section -->
+        <section class="controls-section">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" data-translate="searchPlaceholder"
+                    placeholder="Search comfortable clogs..." aria-label="Search footwear items">
+                <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear search"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="tabs-container">
+                <div class="category-tabs" id="category-tabs">
+                    <button class="tab-btn active" data-category="all" id="tab-all" data-translate="tabAll">All
+                        Products</button>
+                    <button class="tab-btn" data-category="classic" id="tab-classic" data-translate="tabClassic">Classic
+                        Clogs</button>
+                    <button class="tab-btn" data-category="platform" id="tab-platform"
+                        data-translate="tabPlatform">Platform Clogs</button>
+                    <button class="tab-btn" data-category="sports" id="tab-sports" data-translate="tabSports">Sports &
+                        Outdoor</button>
+                    <button class="tab-btn" data-category="limited" id="tab-limited" data-translate="tabLimited">Limited
+                        Edition</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Listing Grid -->
+        <section class="catalog-section">
+            <div class="catalog-grid" id="product-grid">
+                <!-- Product cards will be injected dynamically by app.js -->
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Preparing comfortable footwear catalog...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Area -->
+    <footer class="app-footer">
+        <p>&copy; 2026 ClogHaven. Walking in absolute comfort. Seamlessly connected to Google Sheets.</p>
+        <p class="footer-links">
+            <a href="#" id="footer-setup-link"><i class="fa-solid fa-cog"></i> Google Sheet Connection Setup</a>
+        </p>
+    </footer>
+
+    <!-- Floating Cart Button -->
+    <button id="floating-cart" class="floating-cart-btn" aria-label="Open Shopping Cart">
+        <div class="cart-btn-icon">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span id="cart-badge" class="cart-badge">0</span>
+        </div>
+        <div class="cart-btn-total">
+            <span class="total-label">Selected</span>
+            <span id="cart-floating-total" class="total-amount">$0.00</span>
+        </div>
+    </button>
+
+    <!-- Side Cart Drawer Overlay -->
+    <div id="cart-drawer-overlay" class="drawer-overlay"></div>
+
+    <!-- Side Cart Drawer Panel -->
+    <aside id="cart-drawer" class="cart-drawer" aria-labelledby="drawer-title">
+        <div class="drawer-header">
+            <h3 id="drawer-title"><i class="fa-solid fa-basket-shopping gold-text"></i> កន្រ្តកទំនិញ</h3>
+            <button id="cart-close-btn" class="close-btn" aria-label="Close cart"><i
+                    class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Cart Content Area -->
+        <div class="drawer-content">
+            <div id="cart-empty-state" class="empty-state">
+                <i class="fa-solid fa-shoe-prints empty-icon"></i>
+                <h4>Your cart is empty</h4>
+                <p>Browse our catalog and add comfortable clogs to your order.</p>
+                <button id="cart-start-browsing" class="action-btn-gold">Start Browsing</button>
+            </div>
+
+            <div id="cart-populated-state" class="cart-populated-state hidden">
+                <!-- Cart Items Container -->
+                <div class="cart-items-list" id="cart-items-container">
+                    <!-- Cart items injected by JS -->
+                </div>
+
+                <!-- Calculation Breakdown -->
+                <div class="cart-summary-card">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Packaging & Delivery</span>
+                        <span id="cart-delivery">$0.00</span>
+                    </div>
+                    <div class="summary-row divider"></div>
+                    <div class="summary-row total-row">
+                        <span>Total Est.</span>
+                        <span id="cart-total-price" class="gold-text">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Footer / Call to Action -->
+        <div class="drawer-footer hidden" id="cart-drawer-footer">
+            <button id="checkout-btn" class="checkout-submit-btn">
+                <span data-translate="proceedCheckout">Proceed to Checkout</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Checkout Modal Dialog -->
+    <div id="checkout-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+        <div class="modal-box checkout-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-receipt gold-text"></i> <span data-translate="checkoutDetailsHeader">Checkout
+                        Details</span></h3>
+                <button id="checkout-close-btn" class="close-btn" aria-label="Close checkout"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <form id="checkout-form" class="checkout-form">
+                <div class="modal-body scrollable-body">
+                    <!-- Order Items Visual Summary -->
+                    <div class="order-items-preview-banner">
+                        <span class="preview-count"><i class="fa-solid fa-utensils"></i> <span
+                                id="checkout-items-count">0</span> <span data-translate="itemsSelected">items
+                                selected</span></span>
+                        <span class="preview-price" id="checkout-total-price">$0.00</span>
+                    </div>
+
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h4 data-translate="custDetailsHeader">1. Customer Details</h4>
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="cust-name" data-translate="nameLabel">Full Name <span
+                                        class="required">*</span></label>
+                                <input type="text" id="cust-name" required placeholder="e.g. Arthur Pendragon">
+                            </div>
+                            <div class="form-group">
+                                <label for="cust-phone" data-translate="phoneLabel">Phone Number <span
+                                        class="required">*</span></label>
+                                <input type="tel" id="cust-phone" required placeholder="e.g. +1 (555) 019-2834">
+                            </div>
+                        </div>
+                        <div class="form-group khmer-os-battambang">
+                            <label for="cust-id" data-translate="idLabel">លេខសម្គាល់អតិថិជន <span
+                                    class="required">*</span></label>
+                            <input type="text" id="cust-id" required placeholder="KH">
+                        </div>
+                    </div>
+
+                    <!-- Delivery Preferences -->
+                    <div class="form-section">
+                        <h4 data-translate="addressSectionHeader">2. Fulfillment Method</h4>
+                        <!-- Hidden input so the Javascript backend processes it as 'Delivery' without layout overhead -->
+                        <input type="radio" name="order-type" value="Delivery" checked id="order-type-delivery"
+                            style="display: none;">
+
+                        <!-- Delivery Address Box (Optional) -->
+                        <div id="address-container" class="form-group address-group active">
+                            <label for="cust-address" data-translate="addressLabel">Delivery Address (Optional)</label>
+                            <textarea id="cust-address" data-translate="addressPlaceholder"
+                                placeholder="Street address, unit/apt number, city, and zip code..."
+                                rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Hidden input to satisfy app.js special requests reference without erroring -->
+                    <input type="hidden" id="cust-notes" value="">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="checkout-back-btn" class="secondary-btn" data-translate="backBtn">Back to
+                        Cart</button>
+                    <button type="submit" id="place-order-submit-btn" class="primary-action-btn-gold">
+                        <span class="btn-text" data-translate="placeOrderBtn">Place Order</span>
+                        <div class="btn-spinner hidden"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Developer/Setup Configuration Modal -->
+    <div id="dev-modal" class="modal-overlay" aria-hidden="true" role="dialog">
+        <div class="modal-box dev-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-network-wired gold-text"></i> Google Sheets Connection Center</h3>
+                <button id="dev-close-btn" class="close-btn" aria-label="Close developer setup"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="modal-body scrollable-body">
+                <div class="connection-status-panel">
+                    <div class="status-item">
+                        <span>Current System Bridge:</span>
+                        <strong id="current-mode-status" class="status-mock">MOCK SIMULATION (Offline Local
+                            Storage)</strong>
+                    </div>
+                    <div class="status-indicator-graphic">
+                        <div class="node-circle active"><i class="fa-solid fa-globe"></i></div>
+                        <div class="node-line" id="connection-flow-line"></div>
+                        <div class="node-circle" id="sheet-node-circle"><i class="fa-solid fa-table-list"></i></div>
+                    </div>
+                </div>
+
+                <!-- Web App Settings Form -->
+                <div class="config-settings-form">
+                    <h4>1. Configure API Integration</h4>
+                    <p class="description-txt">Paste your published Google Apps Script Web App URL below to start saving
+                        live data. Leave blank to run in mock sandbox mode.</p>
+
+                    <div class="form-group">
+                        <label for="apps-script-url">Google Apps Script Web App URL</label>
+                        <div class="input-with-action">
+                            <input type="url" id="apps-script-url"
+                                placeholder="https://script.google.com/macros/s/.../exec">
+                            <button id="test-connection-btn" class="test-btn" type="button">Test Link</button>
+                        </div>
+                        <span class="url-hint">Must end in `/exec` and be deployed for "Anyone" access.</span>
+                    </div>
+                </div>
+
+                <!-- Setup Guide Tabs / Accordion -->
+                <div class="setup-instructions">
+                    <h4>2. Seamless 3-Step Setup Guide</h4>
+
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <div class="step-details">
+                            <h5>Create Google Sheet & Open Script Editor</h5>
+                            <p>Open Google Sheets, create a blank spreadsheet, then click <strong>Extensions -> Apps
+                                    Script</strong> in the top menu bar.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <div class="step-details">
+                            <h5>Copy & Paste Apps Script Code</h5>
+                            <p>Delete all boilerplate code in the script editor, and paste the code block below. Save
+                                with the disk icon.</p>
+
+                            <div class="code-copy-container">
+                                <div class="copy-bar">
+                                    <span>google-apps-script.js</span>
+                                    <button id="copy-script-code-btn" class="copy-code-btn"><i
+                                            class="fa-regular fa-copy"></i> Copy Code</button>
+                                </div>
+                                <textarea readonly class="code-textarea" id="script-code-display"
+                                    rows="6">Loading script code...</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">3</div>
+                        <div class="step-details">
+                            <h5>Deploy as Web App</h5>
+                            <p>Click <strong>Deploy -> New deployment</strong>. Select <strong>Web app</strong>.
+                                Configure:
+                            <ul>
+                                <li><strong>Execute as:</strong> "Me (your email)"</li>
+                                <li><strong>Who has access:</strong> "Anyone" (Crucial!)</li>
+                            </ul>
+                            Click deploy, authorize, copy the <strong>Web App URL</strong>, and paste it into the form
+                            above!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="dev-save-btn" class="primary-action-btn-gold">Apply Configuration</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Confirmation Overlay Screen -->
+    <div id="success-overlay" class="modal-overlay success-overlay" aria-hidden="true">
+        <div class="success-card">
+            <div class="success-icon-wrap">
+                <div class="success-icon-ring"></div>
+                <div class="success-icon-checkmark"><i class="fa-solid fa-check"></i></div>
+            </div>
+
+            <h2>Order Placed Successfully!</h2>
+            <p class="success-subtitle" id="success-order-id-display">Order ID: ORD-827461</p>
+
+            <div class="success-invoice">
+                <h4>Recipient</h4>
+                <p id="success-recipient-name">John Doe</p>
+
+                <h4 class="mt-15">Order Details</h4>
+                <div class="invoice-items" id="success-invoice-items">
+                    <!-- Injected items -->
+                </div>
+
+                <div class="invoice-total">
+                    <span>Total Cost</span>
+                    <strong id="success-invoice-total" class="gold-text">$0.00</strong>
+                </div>
+            </div>
+
+            <!-- Sheets Sync Progress Status -->
+            <div class="sheets-sync-status-indicator" id="sync-indicator">
+                <i class="fa-solid fa-circle-notch fa-spin sync-icon spinner-icon"></i>
+                <span id="sync-status-text">Writing receipt to Google Sheets...</span>
+            </div>
+
+            <button id="success-close-btn" class="primary-action-btn-gold mt-25">Select More Clogs</button>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notification System Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- App Logic Script -->
+    <script src="app.js"></script>
+</body>
+
+</html>
