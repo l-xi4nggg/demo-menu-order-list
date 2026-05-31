@@ -129,7 +129,7 @@ const TRANSLATIONS = {
         toastThemeDark: "បានប្តូរទៅកាន់មុខងារងងឹត។",
         toastThemeLight: "បានប្តូរទៅកាន់មុខងារពន្លឺ។"
     },
-    ch: {
+    /* ch: {
         heroBadge: "åªéœ€30ç¾Žå…ƒå³å¯å¼€åˆ›å°åž‹ä¸šåŠ¡",
         heroTitle: "æ‹¥æœ‰å¤šç§äº§å“åº“å­˜",
         heroDesc: "æŸ¬åŸ”å¯¨å¸‚åœºä»·æ ¼ä¸Žè´¨é‡ä¿è¯",
@@ -170,7 +170,7 @@ const TRANSLATIONS = {
         toastThemeUpdated: "ä¸»é¢˜å·²æ›´æ–°",
         toastThemeDark: "å·²åˆ‡æ¢ä¸ºæš—é»‘å¤œè‰²æ¨¡å¼ã€‚",
         toastThemeLight: "å·²åˆ‡æ¢ä¸ºæ¸©æ¶¦è±¡ç‰™æ¨¡å¼ã€‚"
-    }
+    }*/
 };
 
 // 2. STATE MANAGER
