@@ -2078,3 +2078,302 @@ body {
         transform: translateY(0);
     }
 }
+
+/* ==========================================================================
+   VIDEO SHOWCASE SECTION
+   ========================================================================== */
+.video-showcase-section {
+    width: 100%;
+    margin: 40px 0 50px 0;
+    padding: 35px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-smooth);
+}
+
+.video-showcase-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.video-showcase-header h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(24px, 3.5vw, 32px);
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.video-showcase-header p {
+    color: var(--text-secondary);
+    font-size: clamp(13px, 1.6vw, 15px);
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.video-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.video-showcase-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-smooth);
+}
+
+.video-showcase-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(var(--gold-rgb), 0.3);
+    box-shadow: var(--shadow-lg), var(--shadow-gold);
+}
+
+.video-showcase-wrapper {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.video-showcase-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-smooth);
+}
+
+.video-showcase-card:hover .video-showcase-wrapper video {
+    transform: scale(1.03);
+}
+
+.video-showcase-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
+    opacity: 0.85;
+    transition: opacity var(--transition-fast);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-showcase-card:hover .video-showcase-overlay {
+    opacity: 1;
+}
+
+.play-toggle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(var(--gold-rgb), 0.9);
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), var(--shadow-gold);
+    transition: all var(--transition-bounce);
+    z-index: 5;
+}
+
+.play-toggle-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--gold-hover);
+}
+
+.mute-toggle-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background-color: rgba(18, 18, 18, 0.7);
+    border: 1px solid var(--border-color);
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    transition: all var(--transition-fast);
+    z-index: 5;
+}
+
+.mute-toggle-btn:hover {
+    background-color: var(--gold);
+    border-color: var(--gold);
+}
+
+.video-showcase-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+    background: var(--bg-surface);
+}
+
+.video-showcase-info h3 {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.video-showcase-info p {
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   FEATURED AD BANNER
+   ========================================================================== */
+.featured-ad-banner {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.ad-video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: #000;
+}
+
+.ad-video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ad-overlay-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 60%, rgba(0, 0, 0, 0.1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+    z-index: 2;
+    color: #ffffff;
+}
+
+.ad-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background-color: var(--gold);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow-gold);
+}
+
+.ad-overlay-content h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700;
+    margin-bottom: 12px;
+    max-width: 500px;
+    line-height: 1.2;
+}
+
+.ad-overlay-content p {
+    font-size: clamp(13px, 1.8vw, 15px);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 550px;
+    margin-bottom: 25px;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.ad-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.ad-btn {
+    padding: 10px 22px;
+    border-radius: 40px;
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+}
+
+.ad-btn-primary {
+    background-color: var(--gold);
+    color: #ffffff;
+}
+
+.ad-btn-primary:hover {
+    background-color: var(--gold-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+.ad-btn-secondary {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+}
+
+.ad-btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .ad-video-wrapper {
+        height: 320px;
+    }
+    .ad-overlay-content {
+        padding: 24px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 100%);
+        justify-content: flex-end;
+    }
+    .ad-overlay-content h2 {
+        font-size: 20px;
+    }
+    .ad-overlay-content p {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+}

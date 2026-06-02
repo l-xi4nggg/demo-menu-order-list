@@ -23,12 +23,12 @@ function doPost(e) {
     if (!e || !e.postData || !e.postData.contents) {
       throw new Error("No payload found in the request. Make sure you are sending a POST request with a JSON body.");
     }
-    
+
     var orderData = JSON.parse(e.postData.contents);
-    
+
     // Save the order to the Google Sheet
     var result = appendOrderToSheet(orderData);
-    
+
     // Return a successful JSON response
     return ContentService.createTextOutput(JSON.stringify({
       status: "success",
@@ -36,15 +36,15 @@ function doPost(e) {
       rowNumber: result.rowNumber,
       message: "Order has been logged in Google Sheets successfully!"
     }))
-    .setMimeType(ContentService.MimeType.JSON);
-    
+      .setMimeType(ContentService.MimeType.JSON);
+
   } catch (error) {
     // Return an error JSON response
     return ContentService.createTextOutput(JSON.stringify({
       status: "error",
       message: "Failed to write order: " + error.toString()
     }))
-    .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
@@ -56,7 +56,7 @@ function doGet(e) {
     sheetsConnected: true,
     timestamp: new Date().toISOString()
   }))
-  .setMimeType(ContentService.MimeType.JSON);
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 /**
@@ -65,23 +65,23 @@ function doGet(e) {
  */
 function appendOrderToSheet(data) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  
+
   // Define standard columns
   var headers = [
-    "Order ID", 
+    "Order ID",
     "Customer ID",
-    "Timestamp", 
-    "Customer Name", 
-    "Phone Number", 
-    "Email Address", 
-    "Order Type", 
-    "Delivery Address", 
-    "Items Summary", 
-    "Total Price", 
-    "Special Requests", 
+    "Timestamp",
+    "Customer Name",
+    "Phone Number",
+    "Telegram",
+    "Order Type",
+    "Delivery Address",
+    "Items Summary",
+    "Total Price",
+    "Special Requests",
     "Order Status"
   ];
-  
+
   // If sheet is empty, set up the headers and styling
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(headers);
@@ -92,46 +92,47 @@ function appendOrderToSheet(data) {
     headerRange.setFontColor("#FFFFFF");
     headerRange.setFontFamily("Arial");
     headerRange.setHorizontalAlignment("center");
-    
+
     // Auto-fit columns initially
     for (var col = 1; col <= headers.length; col++) {
       sheet.autoResizeColumn(col);
     }
   }
-  
+
   // Format items array into a clean readable string
   // Items format expected: [{name: "Burger", quantity: 2, price: 15.00}, ...]
   var itemsSummary = "";
   if (Array.isArray(data.items)) {
-    itemsSummary = data.items.map(function(item) {
+    itemsSummary = data.items.map(function (item) {
       return item.quantity + "x " + item.name + " ($" + (item.price * item.quantity).toFixed(2) + ")";
     }).join("\n");
   } else {
     itemsSummary = data.items || "No items listed";
   }
-  
+
   // Create a unique Order ID if none is supplied
   var orderId = data.orderId || "ORD-" + Math.floor(100000 + Math.random() * 900000);
-  
+
   // Gather values to insert
   var timestamp = new Date();
   var customerId = data.customerId || "N/A";
   var customerName = data.customerName || "N/A";
   var phone = data.phone || "N/A";
+  var telegram = data.telegram || "N/A";
   var email = data.email || "N/A";
   var orderType = data.orderType || "Pickup";
   var address = data.address || (orderType === "Pickup" ? "N/A - Store Pickup" : "N/A");
   var totalPrice = data.totalPrice !== undefined ? "$" + Number(data.totalPrice).toFixed(2) : "$0.00";
   var notes = data.notes || "";
   var status = "Pending"; // Default status
-  
+
   var rowData = [
     orderId,
     customerId,
     timestamp,
     customerName,
     phone,
-    email,
+    telegram,
     orderType,
     address,
     itemsSummary,
@@ -139,28 +140,28 @@ function appendOrderToSheet(data) {
     notes,
     status
   ];
-  
+
   // Append row
   sheet.appendRow(rowData);
   var newRowIndex = sheet.getLastRow();
-  
+
   // Apply visual styling to the new order row
   var newRowRange = sheet.getRange(newRowIndex, 1, 1, headers.length);
   newRowRange.setFontFamily("Arial");
   newRowRange.setVerticalAlignment("middle");
-  
+
   // Format price column specifically (Column 10)
   var priceCell = sheet.getRange(newRowIndex, 10);
   priceCell.setHorizontalAlignment("right");
-  
+
   // Format Order ID, Customer ID, and Status columns (Columns 1, 2 & 12) for center alignment
   sheet.getRange(newRowIndex, 1).setHorizontalAlignment("center");
   sheet.getRange(newRowIndex, 2).setHorizontalAlignment("center");
   sheet.getRange(newRowIndex, 12).setHorizontalAlignment("center");
-  
+
   // Wrap text on the items summary column (Column 9) so it reads well
   sheet.getRange(newRowIndex, 9).setWrap(true);
-  
+
   return {
     orderId: orderId,
     rowNumber: newRowIndex

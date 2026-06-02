@@ -74,11 +74,11 @@
                 </button>
 
                 <!-- Google Sheets Settings Button -->
-                <button id="dev-panel-btn" class="header-btn dev-indicator mock" title="Configure Google Sheets"
+                <!--<button id="dev-panel-btn" class="header-btn dev-indicator mock" title="Configure Google Sheets"
                     aria-label="Open Developer and Sheets Setup Panel">
                     <i class="fa-solid fa-circle-nodes"></i>
                     <span class="status-badge-text">Mock Connection</span>
-                </button>
+                </button>-->
             </div>
         </div>
     </header>
@@ -95,6 +95,38 @@
             </div>
         </section>
 
+        <!-- Video Introductions Showcase Section (TOP) -->
+        <section class="video-showcase-section">
+            <div class="video-showcase-header">
+                <h2 data-translate="videoSectionTitle">Featured Product Showcases</h2>
+                <p data-translate="videoSectionDesc">Watch our short video introductions to see the premium quality of
+                    our models in action.</p>
+            </div>
+
+            <!-- Featured Full-Width Advertise Video Banner (Top) -->
+            <div class="featured-ad-banner">
+                <div class="ad-video-wrapper">
+                    <video src="assets/video product list/1.mp4" autoplay loop muted playsinline preload="auto"
+                        id="ad-video-player-top"></video>
+                    <div class="ad-overlay-content">
+                        <span class="ad-badge"><i class="fa-solid fa-fire"></i> Hot Collection</span>
+                        <h2>Step Into Absolute Comfort</h2>
+                        <p>Experience the ultra-lightweight, slip-resistant classic & platform clogs designed for your
+                            daily walking pleasure.</p>
+                        <div class="ad-actions">
+                            <button class="ad-btn ad-btn-primary" type="button" onclick="scrollToCatalog()"><i
+                                    class="fa-solid fa-cart-shopping"></i> Shop Now</button>
+                            <button class="ad-btn ad-btn-secondary" type="button"
+                                onclick="toggleMuteVideo('ad-video-player-top', this)">
+                                <i class="fa-solid fa-volume-xmark"></i> Sound On
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <!-- Search and Filtering Section -->
         <section class="controls-section">
             <div class="search-box">
@@ -107,9 +139,12 @@
 
             <div class="tabs-container">
                 <div class="category-tabs" id="category-tabs">
-                    <button class="tab-btn active" data-category="all" id="tab-all" data-translate="tabAll">All Products</button>
-                    <button class="tab-btn" data-category="shoes" id="tab-shoes" data-translate="tabShoes">Shoes</button>
-                    <button class="tab-btn" data-category="cosmetic" id="tab-cosmetic" data-translate="tabCosmetic">Cosmetics</button>
+                    <button class="tab-btn active" data-category="all" id="tab-all" data-translate="tabAll">All
+                        Products</button>
+                    <button class="tab-btn" data-category="shoes" id="tab-shoes"
+                        data-translate="tabShoes">Shoes</button>
+                    <button class="tab-btn" data-category="cosmetic" id="tab-cosmetic"
+                        data-translate="tabCosmetic">Cosmetics</button>
                 </div>
             </div>
         </section>
@@ -121,6 +156,37 @@
                 <div class="loading-state">
                     <div class="spinner"></div>
                     <p>Preparing comfortable footwear catalog...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Introductions Showcase Section (BOTTOM) -->
+        <section class="video-showcase-section bottom-showcase">
+            <div class="video-showcase-header">
+                <h2>Premium Quality & Lifestyle</h2>
+                <p>Discover our cosmetics, accessories, and complete luxury lifestyle offerings.</p>
+            </div>
+
+            <!-- Featured Full-Width Advertise Video Banner (Bottom) -->
+            <div class="featured-ad-banner">
+                <div class="ad-video-wrapper">
+                    <video src="assets/video product list/2.mp4" autoplay loop muted playsinline preload="auto"
+                        id="ad-video-player-bottom"></video>
+                    <div class="ad-overlay-content">
+                        <span class="ad-badge" style="background-color: var(--success);"><i
+                                class="fa-solid fa-wand-magic-sparkles"></i> Pure Quality</span>
+                        <h2>Complete Beauty & Styling</h2>
+                        <p>Take a closer look at our latest collections, premium cosmetics, and accessories designed for
+                            absolute value.</p>
+                        <div class="ad-actions">
+                            <button class="ad-btn ad-btn-primary" type="button" onclick="scrollToCatalog()"><i
+                                    class="fa-solid fa-wand-magic-sparkles"></i> Explore Products</button>
+                            <button class="ad-btn ad-btn-secondary" type="button"
+                                onclick="toggleMuteVideo('ad-video-player-bottom', this)">
+                                <i class="fa-solid fa-volume-xmark"></i> Sound On
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -235,10 +301,15 @@
                                 <input type="tel" id="cust-phone" required placeholder="e.g. +1 (555) 019-2834">
                             </div>
                         </div>
-                        <div class="form-group khmer-os-battambang">
-                            <label for="cust-id" data-translate="idLabel">លេខសម្គាល់អតិថិជន <span
-                                    class="required">*</span></label>
-                            <input type="text" id="cust-id" required placeholder="KH">
+                        <div class="form-group-row">
+                            <div class="form-group khmer-os-battambang">
+                                <label for="cust-id" data-translate="idLabel">លេខសម្គាល់អតិថិជន</label>
+                                <input type="text" id="cust-id" placeholder="KH">
+                            </div>
+                            <div class="form-group">
+                                <label for="cust-telegram" data-translate="telegramLabel">Telegram <span class="required">*</span></label>
+                                <input type="text" id="cust-telegram" required placeholder="phone number or username">
+                            </div>
                         </div>
                     </div>
 

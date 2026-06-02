@@ -67,7 +67,8 @@ const TRANSLATIONS = {
         custDetailsHeader: "1. Customer Details",
         nameLabel: "Full Name",
         phoneLabel: "Phone Number",
-        idLabel: "Customer ID",
+        idLabel: "Customer ID (Optional)",
+        telegramLabel: "Telegram",
         addressSectionHeader: "2. Fulfillment Method",
         addressLabel: "Delivery Address (Optional)",
         addressPlaceholder: "Street address, unit/apt number, city, and zip code...",
@@ -93,7 +94,9 @@ const TRANSLATIONS = {
         toastCartEmpty: "Please select products to checkout.",
         toastThemeUpdated: "Theme Updated",
         toastThemeDark: "Switched to Midnight Dark mode.",
-        toastThemeLight: "Switched to Warm Ivory Light mode."
+        toastThemeLight: "Switched to Warm Ivory Light mode.",
+        videoSectionTitle: "Featured Product Showcases",
+        videoSectionDesc: "Watch our short video introductions to see the premium quality of our models in action."
     },
     kh: {
         heroBadge: "ចំណាយតែ៣០ដុល្លា លោកអ្នកនិងក្លាយជាម្ចាស់អាជីវកម្មខ្នាតតូចមួយរូប",
@@ -110,7 +113,8 @@ const TRANSLATIONS = {
         custDetailsHeader: "១. ព័ត៌មានលម្អិតរបស់អតិថិជន",
         nameLabel: "ឈ្មោះពេញ",
         phoneLabel: "លេខទូរស័ព្ទ",
-        idLabel: "លេខសម្គាល់អតិថិជន",
+        idLabel: "លេខសម្គាល់អតិថិជន (ជម្រើស)",
+        telegramLabel: "តេឡេក្រាម",
         addressSectionHeader: "២. វិធីសាស្ត្រដឹកជញ្ជូន",
         addressLabel: "អាសយដ្ឋានដឹកជញ្ជូន (ជម្រើស)",
         addressPlaceholder: "អាសយដ្ឋានផ្លូវ ផ្ទះលេខ សង្កាត់ ក្រុង និងកូដប្រៃសណីយ៍...",
@@ -136,7 +140,9 @@ const TRANSLATIONS = {
         toastCartEmpty: "សូមជ្រើសរើសផលិតផលដើម្បីទូទាត់ប្រាក់។",
         toastThemeUpdated: "បានផ្លាស់ប្តូរស្បែកជោគជ័យ",
         toastThemeDark: "បានប្តូរទៅកាន់មុខងារងងឹត។",
-        toastThemeLight: "បានប្តូរទៅកាន់មុខងារពន្លឺ។"
+        toastThemeLight: "បានប្តូរទៅកាន់មុខងារពន្លឺ។",
+        videoSectionTitle: "វីដេអូបង្ហាញពីផលិតផល",
+        videoSectionDesc: "ទស្សនាវីដេអូខ្លីៗដើម្បីស្វែងយល់ពីគុណភាពខ្ពស់នៃផលិតផលរបស់យើង។"
     },
     /* ch: {
         heroBadge: "åªéœ€30ç¾Žå…ƒå³å¯å¼€åˆ›å°åž‹ä¸šåŠ¡",
@@ -182,13 +188,13 @@ const TRANSLATIONS = {
     }*/
 };
 
-// 2. STATE MANAGER
+// 2. STATE MANAGER (Google Script and Google Sheet)
 const State = {
     cart: [],
     selectedCategory: "all",
     searchQuery: "",
     theme: "dark",
-    googleSheetsUrl: "https://script.google.com/macros/s/AKfycbw5pWq1z5mnHEh078-h2CqTKq1faOaHgeztj4si_qPN2eQXk-ngYwEsYb4rWollCLALlg/exec",
+    googleSheetsUrl: "https://script.google.com/macros/s/AKfycbzM-m8nMGS-ZyiO9kAdrELUYkYu7FPnGkCRlOetFfnuSxIA1IKyyrbNNMZ-ygIzDKjgOg/exec",
     isMockMode: false,
     language: "kh",
 
@@ -212,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartUI();
     registerEventListeners();
     loadAppsScriptText();
+    initVideoShowcase();
 });
 
 // Load configuration saved in local storage
@@ -220,7 +227,7 @@ function loadSettings() {
     if (savedUrl !== null) {
         State.googleSheetsUrl = savedUrl;
     } else {
-        State.googleSheetsUrl = "https://script.google.com/macros/s/AKfycbw5pWq1z5mnHEh078-h2CqTKq1faOaHgeztj4si_qPN2eQXk-ngYwEsYb4rWollCLALlg/exec";
+        State.googleSheetsUrl = "https://script.google.com/macros/s/AKfycbzM-m8nMGS-ZyiO9kAdrELUYkYu7FPnGkCRlOetFfnuSxIA1IKyyrbNNMZ-ygIzDKjgOg/exec";
     }
     State.isMockMode = !State.googleSheetsUrl;
     State.language = localStorage.getItem("loda_language") || "kh";
@@ -348,7 +355,7 @@ function appendOrderToSheet(data) {
     "Timestamp", 
     "Customer Name", 
     "Phone Number", 
-    "Email Address", 
+    "Telegram",
     "Order Type", 
     "Delivery Address", 
     "Items Summary", 
@@ -385,7 +392,7 @@ function appendOrderToSheet(data) {
   var customerId = data.customerId || "N/A";
   var customerName = data.customerName || "N/A";
   var phone = data.phone || "N/A";
-  var email = data.email || "N/A";
+  var telegram = data.telegram || "N/A";
   var orderType = data.orderType || "Pickup";
   var address = data.address || (orderType === "Pickup" ? "N/A - Store Pickup" : "N/A");
   var totalPrice = data.totalPrice !== undefined ? "$" + Number(data.totalPrice).toFixed(2) : "$0.00";
@@ -398,7 +405,7 @@ function appendOrderToSheet(data) {
     timestamp,
     customerName,
     phone,
-    email,
+    telegram,
     orderType,
     address,
     itemsSummary,
@@ -1029,9 +1036,10 @@ function handleOrderSubmission(e) {
     // Extract Form Fields
     const customerName = document.getElementById("cust-name").value.trim();
     const phone = document.getElementById("cust-phone").value.trim();
+    const telegram = document.getElementById("cust-telegram").value.trim();
     const emailEl = document.getElementById("cust-email");
     const email = emailEl ? (emailEl.value.trim() || "N/A") : "N/A";
-    const customerId = document.getElementById("cust-id").value.trim();
+    const customerId = document.getElementById("cust-id").value.trim() || "N/A";
     const orderType = document.querySelector('input[name="order-type"]:checked').value;
     const address = document.getElementById("cust-address").value.trim() || "N/A";
     const notes = document.getElementById("cust-notes").value.trim();
@@ -1051,6 +1059,7 @@ function handleOrderSubmission(e) {
         timestamp: new Date().toISOString(),
         customerName: customerName,
         phone: phone,
+        telegram: telegram,
         email: email,
         orderType: orderType,
         address: address,
@@ -1087,6 +1096,11 @@ function handleOrderSubmission(e) {
 
             // Reset spinner checkout buttons
             resetCheckoutBtnState();
+
+            // Auto-close success modal after 1 second
+            setTimeout(() => {
+                closeSuccessModal();
+            }, 1000);
         }, 1800);
     } else {
         // LIVE SUBMISSION TO GOOGLE APPS SCRIPT WEB APP
@@ -1109,6 +1123,11 @@ function handleOrderSubmission(e) {
                     if (syncText) syncText.innerHTML = `<i class="fa-solid fa-circle-check"></i> Order synced with Google Sheet row #${data.rowNumber || 'N/A'}!`;
 
                     clearCart();
+
+                    // Auto-close success modal after 1 second
+                    setTimeout(() => {
+                        closeSuccessModal();
+                    }, 1000);
                 } else {
                     throw new Error(data.message || "Failed execution logic");
                 }
@@ -1207,5 +1226,96 @@ function closeSuccessModal() {
     if (overlay) {
         overlay.classList.remove("active");
         overlay.setAttribute("aria-hidden", "true");
+    }
+}
+
+// 13. VIDEO SHOWCASE CONTROLLERS
+function initVideoShowcase() {
+    // Make sure all autoplay videos sync their play icon properly
+    document.querySelectorAll("video[autoplay]").forEach(video => {
+        const playBtnIcon = video.parentElement?.querySelector(".play-toggle-btn i");
+        if (playBtnIcon) {
+            playBtnIcon.className = "fa-solid fa-pause";
+        }
+    });
+
+    const videoCards = document.querySelectorAll(".video-showcase-card");
+    videoCards.forEach(card => {
+        const video = card.querySelector("video");
+        const playBtnIcon = card.querySelector(".play-toggle-btn i");
+
+        if (!video) return;
+
+        // Hover play
+        card.addEventListener("mouseenter", () => {
+            if (video.paused) {
+                video.play().catch(err => console.log("Auto-play prevented: ", err));
+                if (playBtnIcon) playBtnIcon.className = "fa-solid fa-pause";
+            }
+        });
+
+        // Leave pause
+        card.addEventListener("mouseleave", () => {
+            if (!video.paused) {
+                video.pause();
+                if (playBtnIcon) playBtnIcon.className = "fa-solid fa-play";
+            }
+        });
+    });
+}
+
+function togglePlayVideo(videoId) {
+    const video = document.getElementById(videoId);
+    if (!video) return;
+
+    const playBtnIcon = video.parentElement.querySelector(".play-toggle-btn i");
+
+    if (video.paused) {
+        // Pause all other showcase videos
+        document.querySelectorAll("video").forEach(v => {
+            if (v.id !== videoId && !v.paused) {
+                v.pause();
+                const icon = v.parentElement?.querySelector(".play-toggle-btn i");
+                if (icon) icon.className = "fa-solid fa-play";
+            }
+        });
+
+        video.play().catch(err => console.log("Play failed: ", err));
+        if (playBtnIcon) playBtnIcon.className = "fa-solid fa-pause";
+    } else {
+        video.pause();
+        if (playBtnIcon) playBtnIcon.className = "fa-solid fa-play";
+    }
+}
+
+function toggleMuteVideo(videoId, btn) {
+    const video = document.getElementById(videoId);
+    if (!video) return;
+
+    video.muted = !video.muted;
+    const icon = btn.querySelector("i");
+    const hasText = btn.classList.contains("ad-btn-secondary");
+
+    if (video.muted) {
+        if (icon) icon.className = "fa-solid fa-volume-xmark";
+        if (hasText) {
+            const textNode = Array.from(btn.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+            if (textNode) textNode.textContent = " Sound On";
+        }
+        showToast("Video Muted", "Audio turned off.", "info");
+    } else {
+        if (icon) icon.className = "fa-solid fa-volume-high";
+        if (hasText) {
+            const textNode = Array.from(btn.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+            if (textNode) textNode.textContent = " Sound Off";
+        }
+        showToast("Video Unmuted", "Audio turned on.", "success");
+    }
+}
+
+function scrollToCatalog() {
+    const section = document.querySelector(".controls-section");
+    if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
     }
 }
