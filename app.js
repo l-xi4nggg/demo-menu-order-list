@@ -188,8 +188,8 @@ const State = {
     selectedCategory: "all",
     searchQuery: "",
     theme: "dark",
-    googleSheetsUrl: "",
-    isMockMode: true,
+    googleSheetsUrl: "https://script.google.com/macros/s/AKfycbw5pWq1z5mnHEh078-h2CqTKq1faOaHgeztj4si_qPN2eQXk-ngYwEsYb4rWollCLALlg/exec",
+    isMockMode: false,
     language: "kh",
 
     // Constants
@@ -216,7 +216,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Load configuration saved in local storage
 function loadSettings() {
-    State.googleSheetsUrl = localStorage.getItem("gourmet_sheets_url") || "";
+    const savedUrl = localStorage.getItem("gourmet_sheets_url");
+    if (savedUrl !== null) {
+        State.googleSheetsUrl = savedUrl;
+    } else {
+        State.googleSheetsUrl = "https://script.google.com/macros/s/AKfycbw5pWq1z5mnHEh078-h2CqTKq1faOaHgeztj4si_qPN2eQXk-ngYwEsYb4rWollCLALlg/exec";
+    }
     State.isMockMode = !State.googleSheetsUrl;
     State.language = localStorage.getItem("loda_language") || "kh";
 
